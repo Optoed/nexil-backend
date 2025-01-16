@@ -55,11 +55,16 @@ func main() {
 	procurementService := services.NewProcurementService(procurementRepo)
 	procurementHandler := handlers.NewProcurementHandler(procurementService)
 
+	purchaseRepo := repositories.NewPurchaseRepository(db)
+	purchaseService := services.NewPurchaseService(purchaseRepo)
+	purchaseHandler := handlers.NewPurchaseHandler(purchaseService)
+
 	r := gin.Default()
 
 	api := r.Group("/api")
 	{
 		api.GET("/procurements", procurementHandler.GetProcurements)
+		api.GET("/purchases", purchaseHandler.GetPurchases)
 	}
 
 	if err := r.Run(":8081"); err != nil {
