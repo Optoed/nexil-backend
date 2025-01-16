@@ -16,3 +16,7 @@ func NewProcurementService(repo *repositories.ProcurementRepository) *Procuremen
 func (s *ProcurementService) GetAllProcurements() ([]models.Procurement, error) {
 	return s.repo.GetAllProcurements()
 }
+
+func (s *ProcurementService) GetProcurementsByDateRange(startDateStr, endDateStr string) ([]models.Procurement, error) {
+	return s.repo.GetProcurementsByDateRange(startDateStr, endDateStr)
+}

@@ -22,3 +22,13 @@ func (r *ProcurementRepository) GetAllProcurements() ([]models.Procurement, erro
 	}
 	return procurements, nil
 }
+
+func (r *ProcurementRepository) GetProcurementsByDateRange(startDate, endDate string) ([]models.Procurement, error) {
+	var procurements []models.Procurement
+	query := `SELECT * FROM procurement WHERE date BETWEEN $1 and $2`
+	err := r.db.Select(&procurements, query, startDate, endDate)
+	if err != nil {
+		return nil, err
+	}
+	return procurements, nil
+}
